@@ -1,0 +1,34 @@
+server:
+  port: 8433
+
+spring:
+  application:
+    name: pedicle
+
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://127.0.0.1:3306/pedicle
+    username: pedicle
+    password: 1234
+    hikari:
+      maximum-pool-size: 20
+
+  batch:
+    job:
+      enabled: false
+      name: icd10MappingInfoInsertJob
+    jdbc:
+      initialize-schema: never
+
+  jpa:
+    defer-datasource-initialization:  true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+      hibernate.default_batch_fetch_size: 100
+
+icdApi:
+  client-id: ${ClientId}
+  client-secret: ${ClientSecret}
