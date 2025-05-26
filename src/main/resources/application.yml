@@ -16,7 +16,7 @@ spring:
   batch:
     job:
       enabled: false
-      name: icd10MappingInfoInsertJob
+      name: icd10To11OneToManyMappingInsertJob
     jdbc:
       initialize-schema: never
 

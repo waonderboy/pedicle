@@ -154,7 +154,6 @@ public class ICD11ApiRes {
         @Data
         @ToString
         public static class TermEntry {
-
             private EntityRes.LocalizedString label;
             private String foundationReference;
             private String linearizationReference;

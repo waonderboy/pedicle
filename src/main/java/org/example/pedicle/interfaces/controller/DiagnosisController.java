@@ -2,6 +2,7 @@ package org.example.pedicle.interfaces.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.pedicle.domain.DiagnosisService;
+import org.example.pedicle.domain.ICDInfo;
 import org.example.pedicle.infra.client.dto.ICD10ApiRes;
 import org.example.pedicle.infra.client.dto.ICD11ApiRes;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,4 +65,26 @@ public class DiagnosisController {
     public ICD11ApiRes.EntityRes getEntityInfo(@RequestParam("entityId") String entityId) {
         return diagnosisService.getEntityInfo(entityId);
     }
+
+    @GetMapping("/similar")
+    public void getSimilar10CodeBy(@RequestParam("icd10Code") String icd10Code) {
+        diagnosisService.getSimilar10CodeBy(icd10Code);
+    }
+
+    @GetMapping("/icd10Info")
+    public ICDInfo.SimilarDisease getIcd10SimilarWith(@RequestParam("icd10Code") String icd10Code) {
+        return diagnosisService.getIcd10SimilarWith(icd10Code);
+    }
+
+    @GetMapping("/icd11Info")
+    public ICDInfo.Icd11Main getIcd11Info(@RequestParam("entityId") String entityId) {
+        return diagnosisService.getIcd11Info(entityId);
+    }
+
+    /**
+     * ICD 10 -> 11 Many Categories 로 매핑
+     * - 단순 M51.1 도 상세 분류된 후보군 제공
+     * - 그리고 같은 부모를 가지는 유사 병명도 제공
+     * - 후보군 선택 시 (해부학적 부위, 증상 후보군 등을 보여줌)
+     */
 }

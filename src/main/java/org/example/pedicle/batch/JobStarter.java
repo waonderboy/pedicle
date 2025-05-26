@@ -17,6 +17,7 @@ public class JobStarter implements ApplicationRunner {
 
     private final JobLauncher jobLauncher;
     private final Job icd10MappingInfoInsertJob; // Job 이름 주의
+    private final Job icd10To11OneToManyMappingInsertJob; // Job 이름 주의
     private final JobExplorer jobExplorer;
 
     @Value("${spring.batch.job.enabled}")
@@ -29,7 +30,8 @@ public class JobStarter implements ApplicationRunner {
                 .toJobParameters();
 //        System.exit(0);
         if (jobStart){
-            jobLauncher.run(icd10MappingInfoInsertJob, jobParameters);
+//            jobLauncher.run(icd10MappingInfoInsertJob, jobParameters);
+            jobLauncher.run(icd10To11OneToManyMappingInsertJob, jobParameters);
         }
     }
 }
